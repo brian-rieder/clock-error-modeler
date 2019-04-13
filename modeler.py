@@ -69,6 +69,7 @@ def iterate_with_delay(process_to_delay, delay_amt, time_of_delay, is_slower=Tru
     while True:
         input()
         if time_of_delay <= clock < delay_amt + time_of_delay:
+            # it's time to have the delay
             transition(atomic=False, state_idx=process_to_delay, invert_selection=is_slower)
             action(atomic=False, state_idx=process_to_delay, invert_selection=is_slower)
         else: # move atomically
