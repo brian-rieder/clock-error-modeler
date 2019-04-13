@@ -14,6 +14,7 @@ def create_test_fsa():
     p0.addTransition(b, always_take)
     c = State("C")
     b.addTransition(c, cnt_eq_5)
+    c.addTransition(c, always_take)
 
     p1 = State("V")
     w = State("W")
@@ -30,7 +31,14 @@ def create_test_fsa():
         global_variables["cnt"] += 1
     z.addAction(inc_count)
 
-    return [p0, p1]
+    p2 = State("U")
+    g = State("G")
+    p2.addTransition(g, always_take)
+    h = State("H")
+    g.addTransition(h, always_take)
+    h.addTransition(p2, always_take)
+
+    return [p0, p1, p2]
 
 
 
