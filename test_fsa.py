@@ -13,7 +13,8 @@ def create_test_fsa():
     b = State("B")
     p0.addTransition(b, always_take)
     c = State("C")
-    b.addTransition(c, cnt_eq_5)
+    b.addTransition(c, always_take)
+    c.addTransition(p0, cnt_eq_5)
     c.addTransition(c, always_take)
 
     p1 = State("V")

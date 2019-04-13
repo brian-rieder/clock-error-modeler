@@ -5,6 +5,7 @@ import random
 from read_config import read_test_configuration
 from State import State, print_process, print_state
 
+clock = 0
 global_variables = {}
 current_states = []
 
@@ -42,7 +43,7 @@ def action(atomic=True, state_idx=None, invert_selection=False):
         [state_action() for state_action in current_states[state_idx].actions]
 
 
-def iterate_with_input():
+def iterate():
     print("-" * 30)
     action()
     print(json.dumps(global_variables, indent=1) + "\n")
@@ -52,7 +53,29 @@ def iterate_with_input():
         input()
         print("-" * 30)
         transition()
-        action(atomic=False, state_idx=1)
+        action()
+        print(json.dumps(global_variables, indent=1) + "\n")
+        for state in current_states:
+            print_state(state)
+
+
+def iterate_with_delay(process_to_delay, delay_amt, time_of_delay, is_slower=True):
+    global clock
+    print("TIME: " + str(clock) + " " + "-" * 30)
+    action()
+    print(json.dumps(global_variables, indent=1) + "\n")
+    for state in current_states:
+        print_state(state)
+    while True:
+        input()
+        if time_of_delay <= clock < delay_amt + time_of_delay:
+            transition(atomic=False, state_idx=process_to_delay, invert_selection=is_slower)
+            action(atomic=False, state_idx=process_to_delay, invert_selection=is_slower)
+        else: # move atomically
+            transition()
+            action()
+        clock += 1
+        print("TIME: " + str(clock) + " " + "-" * 30)
         print(json.dumps(global_variables, indent=1) + "\n")
         for state in current_states:
             print_state(state)
@@ -60,4 +83,4 @@ def iterate_with_input():
 
 if __name__ == "__main__":
     global_variables, current_states = read_test_configuration()
-    iterate_with_input()
+    iterate_with_delay(0, 10, 1, is_slower=False)
