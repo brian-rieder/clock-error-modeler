@@ -2,15 +2,18 @@
 
 from State import State, print_process
 
-global_variables = {}
+global_variables = {"cnt":0}
 
 def create_test_fsa():
     always_take = lambda : True
+    cnt_eq_5 = lambda : global_variables["cnt"] == 5
+    cnt_eq_10 = lambda : global_variables["cnt"] == 10
+
     p0 = State("A")
     b = State("B")
     p0.addTransition(b, always_take)
     c = State("C")
-    b.addTransition(c, always_take)
+    b.addTransition(c, cnt_eq_5)
 
     p1 = State("V")
     w = State("W")
@@ -20,9 +23,14 @@ def create_test_fsa():
     y = State("Y")
     x.addTransition(y, always_take)
     z = State("Z")
-    x.addTransition(z, always_take)
+    y.addTransition(z, always_take)
+    z.addTransition(p1, cnt_eq_10)
 
-    return p0, p1
+    def inc_count():
+        global_variables["cnt"] += 1
+    z.addAction(inc_count)
+
+    return [p0, p1]
 
 
 

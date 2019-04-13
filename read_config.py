@@ -8,7 +8,7 @@ def read_configuration_file():
     pass
 
 def read_test_configuration():
-    return test_fsa.create_test_fsa()
+    return test_fsa.global_variables, test_fsa.create_test_fsa()
 
 if __name__ == "__main__": 
     print("This is not an executable class. Exiting...")
