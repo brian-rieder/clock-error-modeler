@@ -3,37 +3,42 @@
     "cnt": 0,
     "x": 7
   },
-  
-  "states": [
+
+  "processes": [
     {
-      "name": "s0",
-      "actions": []
-    },
-    {
-      "name": "s1",
-      "actions": []
-    },
-    {
-      "name": "s2",
-      "actions": []
-    }    
-  ],
-  
-  "transitions": [
-    {
-      "from": "s0",
-      "to": "s1",
-      "condition": "true"
-    },
-    {
-      "from": "s1",
-      "to": "s2",
-      "condition": "true"
-    },
-    {
-      "from": "s2",
-      "to": "s0",
-      "condition": "true"
+      "name": "p1",
+      "states": [
+        {
+          "name": "s0",
+          "actions": []
+        },
+        {
+          "name": "s1",
+          "actions": []
+        },
+        {
+          "name": "s2",
+          "actions": []
+        }
+      ],
+      
+      "transitions": [
+        {
+          "from": "s0",
+          "to": "s1",
+          "condition": "true"
+        },
+        {
+          "from": "s1",
+          "to": "s2",
+          "condition": "true"
+        },
+        {
+          "from": "s2",
+          "to": "s0",
+          "condition": "true"
+        }
+      ]
     }
   ]
 }
