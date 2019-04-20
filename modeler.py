@@ -2,8 +2,9 @@
 
 import json
 import random
-from read_config import read_test_configuration
+from read_config import read_configuration_file
 from State import State, print_process, print_state
+import sys
 
 clock = 0
 global_variables = {}
@@ -83,5 +84,7 @@ def iterate_with_delay(process_to_delay, delay_amt, time_of_delay, is_slower=Tru
 
 
 if __name__ == "__main__":
-    global_variables, current_states = read_test_configuration()
-    iterate_with_delay(0, 10, 1, is_slower=False)
+    global_variables, current_states = read_configuration_file(sys.argv[1])
+    #print(json.dumps(global_variables))
+    iterate()
+    #iterate_with_delay(0, 10, 1, is_slower=False)

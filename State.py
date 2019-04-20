@@ -21,14 +21,14 @@ class State:
             exit(1)
         self.transitions += transition
 
-    def add_transition(self, state, condition):
+    def add_transition(self, state, condition, string):
         if type(state) != State:
             print("Attempted to add non-State-type transition state. Exiting...")
             exit(1)
         if not callable(condition):
             print("Attempted to add non-function condition to transition. Exiting...")
             exit(1)
-        self.transitions.append({"state":state, "condition":condition})
+        self.transitions.append({"state":state, "condition":condition, "string":string})
 
     def __init__(self, name):
         self.name = name
@@ -42,10 +42,11 @@ class State:
 def print_state(state):
     print(state)
     for transition in state.transitions:
-        func = transition["condition"]
-        funcString = str(inspect.getsourcelines(func)[0])
-        funcString = funcString.strip("['\\n']").split(" = ")[1]
-        print("\t", transition["state"], ", " + funcString)
+        #func = transition["condition"]
+        #print(func)
+        #funcString = str(inspect.getsourcelines(func)[0])
+        #funcString = funcString.strip("['\\n']").split(" = ")[1]
+        print("\t", transition["state"], ", " + transition["string"])
 
 
 def print_process(state, depth=0):

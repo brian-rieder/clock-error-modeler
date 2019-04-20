@@ -26,17 +26,17 @@
         {
           "from": "s0",
           "to": "s1",
-          "condition": "true"
+          "condition": "True"
         },
         {
           "from": "s1",
           "to": "s2",
-          "condition": "true"
+          "condition": "x == 6"
         },
         {
           "from": "s2",
           "to": "s0",
-          "condition": "true"
+          "condition": "True"
         }
       ]
     }
