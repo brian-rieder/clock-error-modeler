@@ -4,9 +4,6 @@ import inspect
 
 class State:
     def add_action(self, action):
-        if not callable(action):
-            print("Attempted to add non-function action. Exiting...")
-            exit(1)
         self.actions.append(action)
 
     def add_transition(self, transition):

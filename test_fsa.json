@@ -14,7 +14,9 @@
         },
         {
           "name": "s1",
-          "actions": []
+          "actions": [
+            "cnt += 1"
+          ]
         },
         {
           "name": "s2",
@@ -31,12 +33,39 @@
         {
           "from": "s1",
           "to": "s2",
-          "condition": "x == 6"
+          "condition": "cnt >= 6"
         },
         {
           "from": "s2",
           "to": "s0",
           "condition": "True"
+        }
+      ]
+    }, 
+    {
+      "name": "p2",
+      "states": [
+        {
+          "name": "x0",
+          "actions": []
+        },
+        {
+          "name": "x1",
+          "actions": [
+          ]
+        }
+      ],
+      
+      "transitions": [
+        {
+          "from": "x0",
+          "to": "x1",
+          "condition": "True"
+        },
+        {
+          "from": "x1",
+          "to": "x0",
+          "condition": "cnt % 6 == 0"
         }
       ]
     }

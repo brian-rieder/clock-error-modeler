@@ -6,24 +6,28 @@ import test_fsa
 
 def read_configuration_file(filename):
     process_list = []
-    state_list = []
-    index = 0
 
     with open(filename) as json_file:
         fsa = json.load(json_file)
         
     for process in fsa["processes"]:
+        state_list = []
+        index = 0
     
         # create list of states
         for s in process["states"]:
         
             # create new state object
             state_list.append(State(s["name"]))
-            
+
+            # assign the actions to the state
+            for a in s["actions"]:
+                state_list[index].add_action(a)
+
             # assign index to state
             s["index"] = index
             index += 1
-            
+
         for t in process["transitions"]:
             
             # get from state

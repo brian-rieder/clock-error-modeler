@@ -39,7 +39,8 @@ def action(atomic=True, state_idx=None, invert_selection=False):
         random.shuffle(shuffled_states)
         for state in shuffled_states:
             for state_action in state.actions:
-                state_action()
+                exec(state_action, global_variables)
+                global_variables.pop("__builtins__", None)
     else: # we're only doing the action of the selected process
         [state_action() for state_action in current_states[state_idx].actions]
 
