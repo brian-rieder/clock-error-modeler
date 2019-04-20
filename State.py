@@ -3,13 +3,13 @@
 import inspect
 
 class State:
-    def addAction(self, action):
+    def add_action(self, action):
         if not callable(action):
             print("Attempted to add non-function action. Exiting...")
             exit(1)
         self.actions.append(action)
 
-    def addTransition(self, transition):
+    def add_transition(self, transition):
         if type(transition) != dict:
             print("Attempted to add non-dictionary transition. Exiting...")
             exit(1)
@@ -21,7 +21,7 @@ class State:
             exit(1)
         self.transitions += transition
 
-    def addTransition(self, state, condition):
+    def add_transition(self, state, condition):
         if type(state) != State:
             print("Attempted to add non-State-type transition state. Exiting...")
             exit(1)

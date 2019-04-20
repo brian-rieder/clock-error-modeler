@@ -11,33 +11,33 @@ def create_test_fsa():
 
     p0 = State("A")
     b = State("B")
-    p0.addTransition(b, always_take)
+    p0.add_transition(b, always_take)
     c = State("C")
-    b.addTransition(c, always_take)
-    c.addTransition(p0, cnt_eq_5)
-    c.addTransition(c, always_take)
+    b.add_transition(c, always_take)
+    c.add_transition(p0, cnt_eq_5)
+    c.add_transition(c, always_take)
 
     p1 = State("V")
     w = State("W")
-    p1.addTransition(w, always_take)
+    p1.add_transition(w, always_take)
     x = State("X")
-    w.addTransition(x, always_take)
+    w.add_transition(x, always_take)
     y = State("Y")
-    x.addTransition(y, always_take)
+    x.add_transition(y, always_take)
     z = State("Z")
-    y.addTransition(z, always_take)
-    z.addTransition(p1, cnt_eq_10)
+    y.add_transition(z, always_take)
+    z.add_transition(p1, cnt_eq_10)
 
     def inc_count():
         global_variables["cnt"] += 1
-    z.addAction(inc_count)
+    z.add_action(inc_count)
 
     p2 = State("U")
     g = State("G")
-    p2.addTransition(g, always_take)
+    p2.add_transition(g, always_take)
     h = State("H")
-    g.addTransition(h, always_take)
-    h.addTransition(p2, always_take)
+    g.add_transition(h, always_take)
+    h.add_transition(p2, always_take)
 
     return [p0, p1, p2]
 
