@@ -63,13 +63,21 @@ def iterate():
 
 def iterate_with_delay(process_to_delay, delay_amt, time_of_delay, is_slower=True):
     global clock
+    print("#########################################################################")
+    print("#                          CLOCK ERROR MODELER                          #")
+    print("# Welcome to Brian and Celeste's clock error modeler for CSE812 at MSU. #")
+    print("# Type 'quit' at any time to exit the simulation and output the result. #")
+    print("#########################################################################")
+    print()
     print("TIME: " + str(clock) + " " + "-" * 30)
     action()
     print(json.dumps(global_variables, indent=1) + "\n")
     for state in current_states:
         print_state(state)
     while True:
-        input()
+        user_input = input()
+        if user_input == "quit":
+            break
         if time_of_delay <= clock < delay_amt + time_of_delay:
             # it's time to have the delay
             transition(atomic=False, state_idx=process_to_delay, invert_selection=is_slower)
