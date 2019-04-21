@@ -85,7 +85,8 @@ def iterate_with_delay(process_to_delay, delay_amt, time_of_delay, is_slower=Tru
 
 
 if __name__ == "__main__":
-    global_variables, current_states = read_configuration_file(sys.argv[1])
+    global_variables, current_states, cfg = read_configuration_file(sys.argv[1])
     #print(json.dumps(global_variables))
-    iterate()
-    #iterate_with_delay(0, 10, 1, is_slower=False)
+    # iterate()
+    iterate_with_delay(cfg["process_to_delay"], cfg["delay_amt"], 
+                       cfg["time_of_delay"], cfg["is_slower"])

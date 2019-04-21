@@ -1,4 +1,11 @@
 {
+  "config": {
+    "process_to_delay": 0,
+    "delay_amt": 10,
+    "time_of_delay": 0,
+    "is_slower": true
+  },
+
   "global_variables": {
     "cnt": 0,
     "x": 7
@@ -9,36 +16,34 @@
       "name": "p1",
       "states": [
         {
-          "name": "s0",
+          "name": "A",
           "actions": []
         },
         {
-          "name": "s1",
-          "actions": [
-            "cnt += 1"
-          ]
+          "name": "B",
+          "actions": []
         },
         {
-          "name": "s2",
+          "name": "C",
           "actions": []
         }
       ],
       
       "transitions": [
         {
-          "from": "s0",
-          "to": "s1",
+          "from": "A",
+          "to": "B",
           "condition": "True"
         },
         {
-          "from": "s1",
-          "to": "s2",
-          "condition": "cnt >= 6"
+          "from": "B",
+          "to": "C",
+          "condition": "True"
         },
         {
-          "from": "s2",
-          "to": "s0",
-          "condition": "True"
+          "from": "C",
+          "to": "A",
+          "condition": "cnt == 5"
         }
       ]
     }, 
@@ -46,26 +51,52 @@
       "name": "p2",
       "states": [
         {
-          "name": "x0",
+          "name": "V",
           "actions": []
         },
         {
-          "name": "x1",
-          "actions": [
-          ]
+          "name": "W",
+          "actions": []
+        },
+        {
+          "name": "X",
+          "actions": []
+        },
+        {
+          "name": "Y",
+          "actions": []
+        },
+        {
+          "name": "Z",
+          "actions": ["cnt += 1"]
         }
       ],
       
       "transitions": [
         {
-          "from": "x0",
-          "to": "x1",
+          "from": "V",
+          "to": "W",
           "condition": "True"
         },
         {
-          "from": "x1",
-          "to": "x0",
-          "condition": "cnt % 6 == 0"
+          "from": "W",
+          "to": "X",
+          "condition": "True"
+        },
+        {
+          "from": "X",
+          "to": "Y",
+          "condition": "True"
+        },
+        {
+          "from": "Y",
+          "to": "Z",
+          "condition": "True"
+        },
+        {
+          "from": "Z",
+          "to": "V",
+          "condition": "cnt == 10"
         }
       ]
     }

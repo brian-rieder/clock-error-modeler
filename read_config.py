@@ -51,7 +51,7 @@ def read_configuration_file(filename):
         # add process to the list
         process_list.append(state_list[0])
 
-    return fsa["global_variables"], process_list
+    return fsa["global_variables"], process_list, fsa["config"]
 
 def read_test_configuration():
     return test_fsa.global_variables, test_fsa.create_test_fsa()
