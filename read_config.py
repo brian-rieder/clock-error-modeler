@@ -18,7 +18,7 @@ def read_configuration_file(filename):
         for s in process["states"]:
         
             # create new state object
-            state_list.append(State(s["name"]))
+            state_list.append(State(s["name"], process["name"]))
 
             # assign the actions to the state
             for a in s["actions"]:
@@ -51,7 +51,7 @@ def read_configuration_file(filename):
         # add process to the list
         process_list.append(state_list[0])
 
-    return fsa["global_variables"], process_list, fsa["config"]
+    return fsa, process_list
 
 def read_test_configuration():
     return test_fsa.global_variables, test_fsa.create_test_fsa()

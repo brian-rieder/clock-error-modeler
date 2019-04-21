@@ -27,8 +27,9 @@ class State:
             exit(1)
         self.transitions.append({"state":state, "condition":condition, "string":string})
 
-    def __init__(self, name):
+    def __init__(self, name, process_name):
         self.name = name
+        self.process_name = process_name
         self.transitions = []
         self.actions = []
 

@@ -77,11 +77,33 @@ def iterate_with_delay(process_to_delay, delay_amt, time_of_delay, is_slower=Tru
     while True:
         user_input = input()
         if user_input == "quit":
+            with open("output_fsa.json", "w+") as output_file:
+                json.dump(fsa, output_file)
+                
             break
         if time_of_delay <= clock < delay_amt + time_of_delay:
             # it's time to have the delay
             transition(atomic=False, state_idx=process_to_delay, invert_selection=is_slower)
             action(atomic=False, state_idx=process_to_delay, invert_selection=is_slower)
+            
+            # add delay to model
+            if is_slower and time_of_delay == clock:
+                state_name = current_states[process_to_delay].name
+                
+                # create new transition
+                new_transition = {}
+                new_transition["from"] = state_name
+                new_transition["to"] = state_name
+                new_transition["condition"] = str(time_of_delay) + " <= clock < " + str(delay_amt + time_of_delay)   
+                
+                # add it to the JSON
+                for p in fsa["processes"]:
+                    if p["name"] == current_states[process_to_delay].process_name:
+                        p["transitions"].append(new_transition)
+                        
+                print(json.dumps(fsa, indent=1))
+                
+            
         else: # move atomically
             transition()
             action()
@@ -93,7 +115,9 @@ def iterate_with_delay(process_to_delay, delay_amt, time_of_delay, is_slower=Tru
 
 
 if __name__ == "__main__":
-    global_variables, current_states, cfg = read_configuration_file(sys.argv[1])
+    fsa, current_states = read_configuration_file(sys.argv[1])
+    cfg = fsa["config"]
+    global_variables = fsa["global_variables"]
     #print(json.dumps(global_variables))
     # iterate()
     iterate_with_delay(cfg["process_to_delay"], cfg["delay_amt"], 
