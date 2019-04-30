@@ -101,9 +101,6 @@ def iterate_with_delay(process_to_delay, delay_amt, time_of_delay, is_slower=Tru
                     if p["name"] == current_states[process_to_delay].process_name:
                         p["transitions"].append(new_transition)
                         
-                print(json.dumps(fsa, indent=1))
-                
-            
         else: # move atomically
             transition()
             action()
