@@ -1,8 +1,8 @@
 {
   "config": {
     "process_to_delay": 0,
-    "delay_amt": 10,
-    "time_of_delay": 0,
+    "delay_amt": 5,
+    "time_of_delay": 1,
     "is_slower": true
   },
 
@@ -26,10 +26,19 @@
         {
           "name": "C",
           "actions": []
+        },
+        {
+          "name": "SUCCESS",
+          "actions": []
         }
       ],
       
       "transitions": [
+        {
+          "from": "A",
+          "to": "SUCCESS",
+          "condition": "cnt == 6"
+        },
         {
           "from": "A",
           "to": "B",
@@ -51,14 +60,6 @@
       "name": "p2",
       "states": [
         {
-          "name": "V",
-          "actions": []
-        },
-        {
-          "name": "W",
-          "actions": []
-        },
-        {
           "name": "X",
           "actions": []
         },
@@ -74,16 +75,6 @@
       
       "transitions": [
         {
-          "from": "V",
-          "to": "W",
-          "condition": "True"
-        },
-        {
-          "from": "W",
-          "to": "X",
-          "condition": "True"
-        },
-        {
           "from": "X",
           "to": "Y",
           "condition": "True"
@@ -95,7 +86,7 @@
         },
         {
           "from": "Z",
-          "to": "V",
+          "to": "X",
           "condition": "cnt == 10"
         }
       ]
